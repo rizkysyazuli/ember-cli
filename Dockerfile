@@ -1,5 +1,5 @@
 FROM node:12.13.0
-MAINTAINER Dan Lynn <docker@danlynn.org>
+LABEL Rizky Syazuli <br4inwash3r@gmail.com>
 
 # ember server on port 4200
 # livereload server on port 7020 (changed in v2.17.0 from 49153)
@@ -10,10 +10,10 @@ WORKDIR /myapp
 # run ember server on container start
 CMD ["ember", "server"]
 
-# Install watchman build dependencies 
+# install build dependencies 
 RUN \ 
-	apt-get update -y &&\
-	apt-get install -y python-dev
+	apt-get update -y && \
+	apt-get install -y sudo python-dev vim wget fonts-powerline
 
 # install watchman
 # Note: See the README.md to find out how to increase the
@@ -55,6 +55,14 @@ RUN \
 # terminal sessions
 RUN \
 	echo 'PS1="\[\\e[0;94m\]${debian_chroot:+($debian_chroot)}\\u@\\h:\\w\\\\$\[\\e[m\] "' >> ~/.bashrc
+
+# install starship, pretty shell theme for bash
+ARG STARSHIP=starship-x86_64-unknown-linux-gnu.tar.gz
+RUN \
+	wget -q --show-progress https://github.com/starship/starship/releases/latest/download/${STARSHIP} && \
+	tar xvf ${STARSHIP} && rm ${STARSHIP} && \
+	sudo mv starship /usr/local/bin/ && \
+	echo 'eval "$(starship init bash)"' >> ~/.bashrc
 
 # install ember-cli
 RUN \
