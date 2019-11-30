@@ -13,7 +13,7 @@ CMD ["ember", "server"]
 # install build dependencies 
 RUN \ 
 	apt-get update -y && \
-	apt-get install -y sudo python-dev vim wget fonts-powerline
+	apt-get install -y sudo python-dev vim wget fonts-powerline git-flow
 
 # install watchman
 # Note: See the README.md to find out how to increase the
