@@ -64,6 +64,10 @@ RUN \
     sudo mv starship /usr/local/bin/ && \
     echo 'eval "$(starship init bash)"' >> ~/.bashrc
 
+# enable bash completion
+RUN \
+    echo 'source /etc/profile.d/bash_completion.sh' >> ~/.bashrc
+
 # install ember-cli
 RUN \
     npm install -g ember-cli@3.14.0
