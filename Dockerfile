@@ -28,10 +28,6 @@ RUN \
     make &&\
     make install
 
-# install bower
-RUN \
-    npm install -g bower@1.8.8
-
 # install chrome for default testem config (as of ember-cli 2.15.0)
 RUN \
     apt-get update &&\
@@ -67,6 +63,14 @@ RUN \
 # enable bash completion
 RUN \
     echo 'source /etc/profile.d/bash_completion.sh' >> ~/.bashrc
+
+# install PM2
+RUN \
+    npm install -g pm2
+
+# install bower
+RUN \
+    npm install -g bower@1.8.8
 
 # install ember-cli
 RUN \
